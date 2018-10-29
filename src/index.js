@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import App from './components/App'
 
-ReactDOM.render(
-  <h1>Recipe Proportionizer</h1>,
+render(
+  <App/>,
   document.getElementById("root")
 );
