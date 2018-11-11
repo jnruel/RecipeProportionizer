@@ -37,8 +37,8 @@ export default class AddIngredientForm extends React.Component {
 
           <select ref="measurementType">
             <option>Select Measurement Type</option>
-            <option value="cup">Cup</option>
-            <option value="tablespoon">Tablespoon</option>
+            <option value="cup">Cup(s)</option>
+            <option value="tablespoon">Tablespoon(s)</option>
           </select>
 
           <input placeholder="Name" ref="name" type="text"></input>
