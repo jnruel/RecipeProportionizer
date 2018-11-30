@@ -9,13 +9,13 @@ class IngredientList extends Component {
         <ul className="ingredients-list">
           {
             // Loop ingredients sent from parent state, render list items
-            this.props.ingredients.map((ingredient, key) => {
+            this.props.ingredients.map((thisIngredient, key) => {
               return (
                 <Ingredient
                   key={key}
-                  amount={ingredient.amount}
-                  measurementType={ingredient.measurementType}
-                  name={ingredient.name}
+                  amount={thisIngredient.amount}
+                  measurementType={thisIngredient.measurementType}
+                  name={thisIngredient.name}
                 />
               );
             })

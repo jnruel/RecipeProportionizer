@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class AddIngredientForm extends React.Component {
+class AddIngredientForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,3 +49,5 @@ export default class AddIngredientForm extends React.Component {
     );
   }
 }
+
+export default AddIngredientForm
