@@ -15,7 +15,8 @@ class AddIngredientForm extends React.Component {
     event.preventDefault();
 
     var ingredient = {
-      amount: this.refs.amount.value,
+      amount: parseFloat(this.refs.amount.value),
+      baseAmount: parseFloat(this.refs.amount.value),
       measurementType: this.refs.measurementType.value,
       name: this.refs.name.value,
     };
@@ -33,12 +34,13 @@ class AddIngredientForm extends React.Component {
       <div className="add-ingredient">
         <h2>Add An ingredient:</h2>
         <form className="add-ingredient-form" ref="ingredientForm" onSubmit={this.handleSubmit}>
-          <input placeholder="Amount" ref="amount" type="number"></input>
+          <input placeholder="Amount" ref="amount" type="number" step="0.1"></input>
 
           <select ref="measurementType">
             <option>Select Measurement Type</option>
-            <option value="cup">Cup(s)</option>
+            <option value="teaspoon">Teaspoons(s)</option>
             <option value="tablespoon">Tablespoon(s)</option>
+            <option value="cup">Cup(s)</option>
           </select>
 
           <input placeholder="Name" ref="name" type="text"></input>

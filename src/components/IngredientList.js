@@ -12,7 +12,8 @@ class IngredientList extends Component {
             this.props.ingredients.map((thisIngredient, key) => {
               return (
                 <Ingredient
-                  key={key}
+                  key={thisIngredient.id}
+                  id={thisIngredient.id}
                   amount={thisIngredient.amount}
                   measurementType={thisIngredient.measurementType}
                   name={thisIngredient.name}

@@ -7,13 +7,11 @@ class AdjustProportionBtn extends Component {
   }
 
   adjustProportion(event) {
-
-    const updatedIngredients = [];//this.props.ingredients;
-
+    const updatedIngredients = [];
 
     this.props.ingredients.map(ingredient => {
       let updatedIngredient = Object.assign({}, ingredient);
-      updatedIngredient.amount = updatedIngredient.amount * this.props.amount;
+      updatedIngredient.amount = updatedIngredient.baseAmount * this.props.multiplier;
       updatedIngredients.push(updatedIngredient);
     });
 
@@ -23,7 +21,7 @@ class AdjustProportionBtn extends Component {
   render() {
     return (
       <button onClick={this.adjustProportion}>
-        Double it
+        {this.props.text}
       </button>
     )
   }
