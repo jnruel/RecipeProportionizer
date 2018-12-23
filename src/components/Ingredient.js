@@ -16,6 +16,7 @@ class Ingredient extends PureComponent {
         <span className="ingredient-amount">{this.props.amount}&nbsp;</span>
         <span className="ingredient-measurement-type">{measurementType}&nbsp;</span>
         <span className="ingredient-name">of {this.props.name}</span>
+        {/* <button>Edit</button> */}
       </li>
     )
   }

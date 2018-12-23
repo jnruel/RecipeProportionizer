@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import AddIngredientForm from './AddIngredientForm'
 import IngredientList from './IngredientList'
 import AdjustProportionBtn from './AdjustProportionBtn';
-// import update from 'immutability-helper';
 
 class App extends Component {
   constructor(props) {
@@ -34,16 +33,18 @@ class App extends Component {
     }
 
     this.state.lastId = lastId
-    this.addIngredient = this.addIngredient.bind(this);
+
+    // Bind functions
+    this.submitIngredient = this.submitIngredient.bind(this);
     this.updateIngredients = this.updateIngredients.bind(this);
   }
 
   // Allow AddIngredientForm child to update this state
-  addIngredient(newIngredient) {
+  submitIngredient(newIngredient) {
     newIngredient.id = this.state.lastId + 1;
     this.state.ingredients.push(newIngredient);
-    this.setState({ingredients: this.state.ingredients, lastId: newIngredient.id}, function() {
-      console.log(this.state);
+    this.setState({ ingredients: this.state.ingredients, lastId: newIngredient.id }, function() {
+      // console.log(this.state);
     });
   }
 
@@ -55,12 +56,14 @@ class App extends Component {
     return (
       <div className="App">
         <AddIngredientForm
-          addIngredient={this.addIngredient}
+          submitIngredient={this.submitIngredient}
         />
 
-        <IngredientList
-          ingredients={this.state.ingredients}
-        />
+        <main>
+          <IngredientList
+            ingredients={this.state.ingredients}
+          />
+        </main>
 
         <h3>Convert proportions by:</h3>
 
