@@ -9,21 +9,23 @@ class App extends Component {
 
     this.state = {
       ingredients: [
-        {
-          id: 1,
-          amount: 2,
-          baseAmount: 2,
-          name: 'butter',
-          measurementType: 'cup'
-        },
-        {
-          id: 2,
-          amount: 1,
-          baseAmount: 1,
-          name: 'vanilla',
-          measurementType: 'tablespoon'
-        }
-      ]
+        // {
+        //   id: 1,
+        //   amount: 2,
+        //   baseAmount: 2,
+        //   name: 'butter',
+        //   measurementType: 'cup'
+        // },
+        // {
+        //   id: 2,
+        //   amount: 1,
+        //   baseAmount: 1,
+        //   name: 'vanilla',
+        //   measurementType: 'tablespoon'
+        // }
+      ],
+      displayForm: false,
+      editingIngredient: null
     };
 
     var lastId = 0;
@@ -35,17 +37,62 @@ class App extends Component {
     this.state.lastId = lastId
 
     // Bind functions
+    this.toggleFormDisplay = this.toggleFormDisplay.bind(this);
+    this.openFormDisplay = this.openFormDisplay.bind(this);
+    this.closeFormDisplay = this.closeFormDisplay.bind(this);
     this.submitIngredient = this.submitIngredient.bind(this);
     this.updateIngredients = this.updateIngredients.bind(this);
   }
 
+  openFormDisplay(ingredient_id = null) {
+    if (ingredient_id !== null) {
+      var editing_ingredient = this.state.ingredients.find(ingredient => ingredient.id === ingredient_id);
+
+      if (typeof editing_ingredient !== 'undefined') {
+        this.setState({editingIngredient: editing_ingredient});
+      }
+    }
+    else {
+      this.setState({editingIngredientId: null});
+    }
+
+    this.setState({displayForm: true});
+  }
+
+  closeFormDisplay() {
+    this.setState({editingIngredient: null});
+    this.setState({displayForm: false});
+  }
+
+  toggleFormDisplay(ingredient_id = null) {
+    if (ingredient_id !== null) {
+
+      var editing_ingredient = this.state.ingredients.find(ingredient => ingredient.id === ingredient_id);
+
+      if (typeof editing_ingredient !== 'undefined') {
+        this.setState({editingIngredient: editing_ingredient});
+      }
+    }
+    else {
+      this.setState({editingIngredientId: null});
+    }
+
+    this.setState({displayForm: !this.state.displayForm});
+  }
+
   // Allow AddIngredientForm child to update this state
   submitIngredient(newIngredient) {
-    newIngredient.id = this.state.lastId + 1;
-    this.state.ingredients.push(newIngredient);
-    this.setState({ ingredients: this.state.ingredients, lastId: newIngredient.id }, function() {
-      // console.log(this.state);
-    });
+    if (typeof newIngredient.id === 'undefined') {
+      newIngredient.id = this.state.lastId + 1;
+      this.state.ingredients.push(newIngredient);
+      this.setState({ ingredients: this.state.ingredients, lastId: newIngredient.id });
+    }
+    else {
+      var thisIngredients = this.state.ingredients;
+      var index = thisIngredients.findIndex(ingredient => ingredient.id === newIngredient.id);
+      thisIngredients[index] = newIngredient;
+      this.setState({ ingredients: this.state.ingredients });
+    }
   }
 
   updateIngredients(updatedIngredients) {
@@ -55,13 +102,20 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <button onClick={this.closeFormDisplay} style={{ display: this.state.displayForm ? 'block' : 'none' }}>Cancel</button>
+        <button onClick={this.openFormDisplay} style={{ display: this.state.displayForm ? 'none' : 'block' }}>Add an ingredient</button>
+
         <AddIngredientForm
           submitIngredient={this.submitIngredient}
+          closeFormDisplay={this.closeFormDisplay}
+          displayForm={this.state.displayForm}
+          editingIngredient={this.state.editingIngredient}
         />
 
         <main>
           <IngredientList
             ingredients={this.state.ingredients}
+            openFormDisplay={this.openFormDisplay}
           />
         </main>
 
