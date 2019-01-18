@@ -15,7 +15,7 @@ class IngredientList extends Component {
                   key={thisIngredient.id}
                   id={thisIngredient.id}
                   amount={thisIngredient.amount}
-                  measurementType={thisIngredient.measurementType}
+                  unit={thisIngredient.unit}
                   name={thisIngredient.name}
                   openFormDisplay={this.props.openFormDisplay}
                 />

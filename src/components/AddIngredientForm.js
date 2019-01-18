@@ -1,10 +1,12 @@
 import React from 'react';
-import '../scss/components/_add-ingredient.scss'
+import '../scss/components/_add-ingredient.scss';
+import Convert from 'convert-units';
 
 class AddIngredientForm extends React.Component {
   constructor(props) {
     super(props);
-
+    let volumeUnits = Convert().list('volume');
+    this.units = volumeUnits.filter(measure => measure.system === 'imperial');
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -16,7 +18,7 @@ class AddIngredientForm extends React.Component {
     var ingredient = {
       amount: parseFloat(this.refs.amount.value),
       baseAmount: parseFloat(this.refs.amount.value),
-      measurementType: this.refs.measurementType.value,
+      unit: this.units[this.refs.unit.value],
       name: this.refs.name.value,
     };
 
@@ -34,16 +36,22 @@ class AddIngredientForm extends React.Component {
   }
 
   render() {
-    var amount, measurement_type, name;
+
+
+
+    // console.log(imperialVolumeUnits);
+
+    var amount, unit, name;
+
     if (this.props.editingIngredient !== null) {
       var editing = this.props.editingIngredient;
       amount = editing.amount;
-      measurement_type = editing.measurementType;
+      unit = editing.unit;
       name = editing.name;
     }
     else {
       amount = '';
-      measurement_type = null;
+      unit = null;
       name = '';
     }
 
@@ -55,11 +63,20 @@ class AddIngredientForm extends React.Component {
             <input placeholder="Amount" ref="amount" type="number" step="0.1" defaultValue={amount} ></input>
 
             {/* TODO: Set selected */}
-            <select ref="measurementType">
+            {/* <select ref="unit">
               <option>Select Measurement Type</option>
               <option value="teaspoon">Teaspoons(s)</option>
               <option value="tablespoon">Tablespoon(s)</option>
               <option value="cup">Cup(s)</option>
+            </select> */}
+
+            <select ref="unit">
+              <option>Select Unit</option>
+              {this.units.map((option, index) =>
+                <option key={index} value={index}>
+                  {option.plural}
+                </option>
+              )}
             </select>
 
             <input placeholder="Name" ref="name" type="text" defaultValue={name}></input>

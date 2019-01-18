@@ -14,14 +14,14 @@ class App extends Component {
         //   amount: 2,
         //   baseAmount: 2,
         //   name: 'butter',
-        //   measurementType: 'cup'
+        //   unit: 'cup'
         // },
         // {
         //   id: 2,
         //   amount: 1,
         //   baseAmount: 1,
         //   name: 'vanilla',
-        //   measurementType: 'tablespoon'
+        //   unit: 'tablespoon'
         // }
       ],
       displayForm: false,
