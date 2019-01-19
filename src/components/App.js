@@ -7,6 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.ingredientForm = React.createRef();
+
     this.state = {
       ingredients: [
         // {
@@ -62,6 +64,7 @@ class App extends Component {
   closeFormDisplay() {
     this.setState({editingIngredient: null});
     this.setState({displayForm: false});
+    this.ingredientForm.current.resetForm();
   }
 
   toggleFormDisplay(ingredient_id = null) {
@@ -106,6 +109,7 @@ class App extends Component {
         <button onClick={this.openFormDisplay} style={{ display: this.state.displayForm ? 'none' : 'block' }}>Add an ingredient</button>
 
         <AddIngredientForm
+          ref={this.ingredientForm}
           submitIngredient={this.submitIngredient}
           closeFormDisplay={this.closeFormDisplay}
           displayForm={this.state.displayForm}
