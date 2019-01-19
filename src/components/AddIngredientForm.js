@@ -36,11 +36,6 @@ class AddIngredientForm extends React.Component {
   }
 
   render() {
-
-
-
-    // console.log(imperialVolumeUnits);
-
     var amount, unit, name;
 
     if (this.props.editingIngredient !== null) {
@@ -60,23 +55,30 @@ class AddIngredientForm extends React.Component {
         <div className="add-ingredient">
           <h2>Add An ingredient:</h2>
           <form className="add-ingredient-form" ref="ingredientForm" onSubmit={this.handleSubmit}>
-            <input placeholder="Amount" ref="amount" type="number" step="0.1" defaultValue={amount} ></input>
-
-            {/* TODO: Set selected */}
-            {/* <select ref="unit">
-              <option>Select Measurement Type</option>
-              <option value="teaspoon">Teaspoons(s)</option>
-              <option value="tablespoon">Tablespoon(s)</option>
-              <option value="cup">Cup(s)</option>
-            </select> */}
+            <input placeholder="Amount" ref="amount" type="number" step="0.01" defaultValue={amount} ></input>
 
             <select ref="unit">
               <option>Select Unit</option>
-              {this.units.map((option, index) =>
-                <option key={index} value={index}>
-                  {option.plural}
-                </option>
-              )}
+              {
+                this.units.map((option, index) => {
+
+                  if (unit !== null && option.plural === unit.plural) {
+                    return (
+                      <option selected key={index} value={index}>
+                        {option.plural}
+                      </option>
+                    )
+                  }
+                  else {
+                    return (
+                      <option key={index} value={index}>
+                        {option.plural}
+                      </option>
+                    );
+                  }
+
+                })
+              }
             </select>
 
             <input placeholder="Name" ref="name" type="text" defaultValue={name}></input>
