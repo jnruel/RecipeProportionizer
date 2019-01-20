@@ -1,0 +1,8 @@
+language: node_js
+cache:
+  directories:
+    - node_modules
+script:
+  - npm publish-deploy
+on:
+  branch: master
