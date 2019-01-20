@@ -2,7 +2,8 @@ language: node_js
 cache:
   directories:
     - node_modules
-script:
-  - npm publish-deploy
-on:
-  branch: master
+deploy:
+  - provider: script
+    script: npm run publish-deploy
+    on:
+      branch: master
