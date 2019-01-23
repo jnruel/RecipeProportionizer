@@ -3,6 +3,8 @@ cache:
   directories:
     - node_modules
 script:
+  - npm install
+  - npm run prod
   - npm run test
 deploy:
   provider: pages
@@ -10,5 +12,6 @@ deploy:
   github-token: $GITHUB_TOKEN
   keep-history: true
   local_dir: dist
+  target-branch: gh-pages
   on:
     branch: master
