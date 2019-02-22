@@ -61,34 +61,44 @@ class AddIngredientForm extends React.Component {
         <div className="add-ingredient">
           <h2>Add An ingredient:</h2>
           <form className="add-ingredient-form" ref="ingredientForm" onSubmit={this.handleSubmit}>
-            <input placeholder="Amount" ref="amount" type="number" step="0.01" defaultValue={amount} ></input>
 
-            <select ref="unit" defaultValue="">
-              <option value="">Select Unit</option>
-              {
-                this.units.map((option, index) => {
-                  // If "unit" exists and is the same unit as the editing ingredient,
-                  // set selected option
-                  if (unit !== null && option.plural === unit.plural) {
-                    return (
-                      <option selected key={index} value={index}>
-                        {option.plural}
-                      </option>
-                    )
-                  }
-                  else {
-                    return (
-                      <option key={index} value={index}>
-                        {option.plural}
-                      </option>
-                    );
-                  }
+            <div className="input-wrapper">
+              <label>Name</label>
+              <input placeholder="Example: Flour" ref="name" type="text" defaultValue={name}></input>
+            </div>
 
-                })
-              }
-            </select>
+            <div className="input-wrapper">
+              <label>Amount</label>
+              <input placeholder="Example: 2" ref="amount" type="number" step="0.01" defaultValue={amount} ></input>
+            </div>
 
-            <input placeholder="Name" ref="name" type="text" defaultValue={name}></input>
+            <div className="input-wrapper">
+              <label>Unit</label>
+              <select ref="unit" defaultValue="">
+                <option value="">Select Unit</option>
+                {
+                  this.units.map((option, index) => {
+                    // If "unit" exists and is the same unit as the editing ingredient,
+                    // set selected option
+                    if (unit !== null && option.plural === unit.plural) {
+                      return (
+                        <option selected key={index} value={index}>
+                          {option.plural}
+                        </option>
+                      )
+                    }
+                    else {
+                      return (
+                        <option key={index} value={index}>
+                          {option.plural}
+                        </option>
+                      );
+                    }
+
+                  })
+                }
+              </select>
+            </div>
 
             <input type="submit" value="Submit" />
           </form>

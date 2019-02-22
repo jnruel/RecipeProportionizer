@@ -1,3 +1,40 @@
-.add-ingredient {
-  // display: none;
+.add-ingredient-container {
+  background-color: gray;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: none;
+}
+
+.add-ingredient-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 992px) {
+    flex-direction: row;
+  }
+}
+
+.input-wrapper {
+  width: 100%;
+  margin: 10px 0;
+  padding: 0 10px;
+
+  @media screen and (min-width: 992px) {
+    width: 33%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
 }

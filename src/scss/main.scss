@@ -1,3 +1,13 @@
-body {
-  //
+
+@import '../../node_modules/normalize-scss/sass/normalize';
+@import '../../node_modules/modularscale-sass/stylesheets/modularscale';
+
+// Base Imports
+@import 'base/variables';
+@import 'base/type';
+@import 'base/inputs';
+
+
+* {
+  box-sizing: border-box;
 }
