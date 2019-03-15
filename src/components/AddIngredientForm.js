@@ -57,52 +57,58 @@ class AddIngredientForm extends React.Component {
     }
 
     return (
-      <div className="add-ingredient-container" style={{ display: this.props.displayForm ? 'block' : 'none' }}>
-        <div className="add-ingredient">
+
+      <div className="add-ingredient" style={{ display: this.props.displayForm ? 'block' : 'none' }}>
+        <div className="add-ingredient-overlay"></div>
+        <div className="add-ingredient-modal">
+          <button onClick={this.props.closeFormDisplay}>Cancel</button>
           <h2>Add An ingredient:</h2>
           <form className="add-ingredient-form" ref="ingredientForm" onSubmit={this.handleSubmit}>
+            <div className="add-ingredient-form-main">
+              <div className="input-wrapper">
+                <label>Name</label>
+                <input placeholder="Example: Flour" ref="name" type="text" defaultValue={name}></input>
+              </div>
 
-            <div className="input-wrapper">
-              <label>Name</label>
-              <input placeholder="Example: Flour" ref="name" type="text" defaultValue={name}></input>
-            </div>
+              <div className="input-wrapper">
+                <label>Amount</label>
+                <input placeholder="Example: 2" ref="amount" type="number" step="0.01" defaultValue={amount} ></input>
+              </div>
 
-            <div className="input-wrapper">
-              <label>Amount</label>
-              <input placeholder="Example: 2" ref="amount" type="number" step="0.01" defaultValue={amount} ></input>
-            </div>
+              <div className="input-wrapper">
+                <label>Unit</label>
+                <select ref="unit" defaultValue="">
+                  <option value="">Select Unit</option>
+                  {
+                    this.units.map((option, index) => {
+                      // If "unit" exists and is the same unit as the editing ingredient,
+                      // set selected option
+                      if (unit !== null && option.plural === unit.plural) {
+                        return (
+                          <option selected key={index} value={index}>
+                            {option.plural}
+                          </option>
+                        )
+                      }
+                      else {
+                        return (
+                          <option key={index} value={index}>
+                            {option.plural}
+                          </option>
+                        );
+                      }
 
-            <div className="input-wrapper">
-              <label>Unit</label>
-              <select ref="unit" defaultValue="">
-                <option value="">Select Unit</option>
-                {
-                  this.units.map((option, index) => {
-                    // If "unit" exists and is the same unit as the editing ingredient,
-                    // set selected option
-                    if (unit !== null && option.plural === unit.plural) {
-                      return (
-                        <option selected key={index} value={index}>
-                          {option.plural}
-                        </option>
-                      )
-                    }
-                    else {
-                      return (
-                        <option key={index} value={index}>
-                          {option.plural}
-                        </option>
-                      );
-                    }
-
-                  })
-                }
-              </select>
+                    })
+                  }
+                </select>
+              </div>
             </div>
 
             <input type="submit" value="Submit" />
           </form>
+
         </div>
+
       </div>
     );
   }
