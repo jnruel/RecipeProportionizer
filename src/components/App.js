@@ -106,8 +106,7 @@ class App extends Component {
     return (
       <div className="app">
         <h1>Recipe Proportionizer</h1>
-        <button onClick={this.closeFormDisplay} style={{ display: this.state.displayForm ? 'block' : 'none' }}>Cancel</button>
-        <button onClick={this.openFormDisplay} style={{ display: this.state.displayForm ? 'none' : 'block' }}>Add an ingredient</button>
+        <button onClick={this.openFormDisplay} disabled={this.state.displayForm}>Add an ingredient</button>
 
         <AddIngredientForm
           ref={this.ingredientForm}
