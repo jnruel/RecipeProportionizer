@@ -6,3 +6,7 @@ input {
 select {
   height: 35px;
 }
+
+button {
+  @include button-reset();
+}

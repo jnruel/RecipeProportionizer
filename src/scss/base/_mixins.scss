@@ -1,0 +1,14 @@
+@mixin button-reset() {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  text-decoration: none;
+  background: $color--button-bg;
+  color: $color--button-text;
+  font-family: sans-serif;
+  font-size: ms(0);
+  cursor: pointer;
+  text-align: center;
+  appearance: none;
+}
