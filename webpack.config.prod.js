@@ -20,15 +20,21 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'sass-loader'
-        }]
+        use: [
+          'style-loader',
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+          { loader: 'sass-resources-loader',
+            options: {
+              sourceMap: true,
+              resources: [
+                './src/scss/base/_variables.scss',
+                './src/scss/base/_mixins.scss',
+              ]
+            }
+          }
+        ]
       }
     ]
   },
