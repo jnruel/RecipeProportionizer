@@ -1,12 +1,30 @@
+input,
+select,
+textarea {
+  font-size: ms(0);
+}
+
+
 input {
-  height: 35px;
-  padding: 0 5px;
+  height: 40px;
+  padding: 0 0.5rem;
 }
 
 select {
   height: 35px;
 }
 
+label {
+  font-size: ms(0);
+}
 button {
   @include button-reset();
+  @include strip-edge-margin();
+  color: $color--button-bg;
+  margin: 0 0.5rem;
+
+  &:hover {
+    background: $color--button-bg;
+    color: $color--button-text;
+  }
 }

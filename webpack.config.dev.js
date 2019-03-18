@@ -1,6 +1,9 @@
 const path = require('path');
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
+const autoprefixer = require("autoprefixer");
+
 
 module.exports = {
   mode: 'development',
@@ -21,27 +24,20 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'sass-loader'
-        }]
-      },
-      {
-        test: /\.css$/,
         use: [
           'style-loader',
-          { loader: 'css-loader', options: { importLoaders: 1 } },
-          { loader: 'postcss-loader', options: {
-            ident: 'postcss',
-            plugins: () => [
-              postcssPresetEnv({ browsers: '> 5%' })
-            ]
-          } }
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+          { loader: 'sass-resources-loader',
+            options: {
+              sourceMap: true,
+              resources: [
+                './src/scss/base/_variables.scss',
+                './src/scss/base/_mixins.scss',
+              ]
+            }
+          }
         ]
       }
     ]

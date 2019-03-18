@@ -61,7 +61,6 @@ class AddIngredientForm extends React.Component {
       <div className="add-ingredient" style={{ display: this.props.displayForm ? 'block' : 'none' }}>
         <div className="add-ingredient-overlay"></div>
         <div className="add-ingredient-modal">
-          <button onClick={this.props.closeFormDisplay}>Cancel</button>
           <h2>Add An ingredient:</h2>
           <form className="add-ingredient-form" ref="ingredientForm" onSubmit={this.handleSubmit}>
             <div className="add-ingredient-form-main">
@@ -103,12 +102,12 @@ class AddIngredientForm extends React.Component {
                 </select>
               </div>
             </div>
-
-            <input type="submit" value="Submit" />
+            <div className="add-ingredient-form-actions">
+              <button onClick={this.props.closeFormDisplay}>Cancel</button>
+              <button type="submit">Submit</button>
+            </div>
           </form>
-
         </div>
-
       </div>
     );
   }

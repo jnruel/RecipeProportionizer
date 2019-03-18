@@ -3,6 +3,7 @@ import AddIngredientForm from './AddIngredientForm'
 import IngredientList from './IngredientList'
 import AdjustProportionBtn from './AdjustProportionBtn';
 
+
 class App extends Component {
   constructor(props) {
     super(props);

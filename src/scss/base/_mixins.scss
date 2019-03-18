@@ -4,11 +4,29 @@
   padding: 0.5rem 1rem;
   margin: 0;
   text-decoration: none;
-  background: $color--button-bg;
-  color: $color--button-text;
-  font-family: sans-serif;
+  border: 2px solid $color--button-bg;
   font-size: ms(0);
   cursor: pointer;
   text-align: center;
   appearance: none;
+}
+
+@mixin strip-edge-padding() {
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+@mixin strip-edge-margin() {
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
