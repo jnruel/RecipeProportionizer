@@ -31,7 +31,7 @@
   display: flex;
   flex-direction: column;
 
-  @media screen and (min-width: 992px) {
+  @include desktop {
     flex-direction: row;
   }
 }
@@ -43,11 +43,13 @@
 }
 
 .input-wrapper {
-  @include strip-edge-padding();
-
   width: 100%;
   margin: 10px 0;
-  padding: 0 0.5rem;
+
+  @include desktop {
+    @include strip-edge-padding();
+    padding: 0 0.5rem;
+  }
 
   input,
   select {

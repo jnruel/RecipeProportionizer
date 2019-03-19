@@ -45,6 +45,7 @@ class App extends Component {
     this.closeFormDisplay = this.closeFormDisplay.bind(this);
     this.submitIngredient = this.submitIngredient.bind(this);
     this.updateIngredients = this.updateIngredients.bind(this);
+    this.haveIngredients = this.haveIngredients.bind(this);
   }
 
   openFormDisplay(ingredient_id = null) {
@@ -103,6 +104,14 @@ class App extends Component {
     this.setState({ingredients: updatedIngredients});
   }
 
+  haveIngredients() {
+    if (!Array.isArray(this.state.ingredients) || !this.state.ingredients.length) {
+      return false;
+    }
+
+    return true;
+  }
+
   render() {
     return (
       <div className="app">
@@ -117,35 +126,55 @@ class App extends Component {
           editingIngredient={this.state.editingIngredient}
         />
 
-        <main>
+        <div className="recipe-proportionizer-main" style={{display: this.haveIngredients() ? 'block' : 'none'}}>
           <IngredientList
             ingredients={this.state.ingredients}
             openFormDisplay={this.openFormDisplay}
           />
-        </main>
 
-        <h3>Convert proportions by:</h3>
+          <p>Adjust proportions by:</p>
 
-        <AdjustProportionBtn
-          updateIngredients={this.updateIngredients}
-          ingredients={this.state.ingredients}
-          multiplier={0.5}
-          text="Half"
-        />
+          <div className="adjust-proportions-buttons">
+            <AdjustProportionBtn
+              updateIngredients={this.updateIngredients}
+              ingredients={this.state.ingredients}
+              multiplier={0.25}
+              text="Quarter"
+            />
 
-        <AdjustProportionBtn
-          updateIngredients={this.updateIngredients}
-          ingredients={this.state.ingredients}
-          multiplier={1}
-          text="Original"
-        />
+            <AdjustProportionBtn
+              updateIngredients={this.updateIngredients}
+              ingredients={this.state.ingredients}
+              multiplier={0.5}
+              text="Half"
+            />
 
-        <AdjustProportionBtn
-          updateIngredients={this.updateIngredients}
-          ingredients={this.state.ingredients}
-          multiplier={2}
-          text="Double"
-        />
+            <AdjustProportionBtn
+              updateIngredients={this.updateIngredients}
+              ingredients={this.state.ingredients}
+              multiplier={1}
+              text="Original"
+            />
+
+            <AdjustProportionBtn
+              updateIngredients={this.updateIngredients}
+              ingredients={this.state.ingredients}
+              multiplier={2}
+              text="Double"
+            />
+
+            <AdjustProportionBtn
+              updateIngredients={this.updateIngredients}
+              ingredients={this.state.ingredients}
+              multiplier={3}
+              text="Triple"
+            />
+          </div>
+        </div>
+
+        <div className="no-ingredients" style={{display: this.haveIngredients() ? 'none' : 'block'}}>
+          <p>No ingredients are added yet</p>
+        </div>
 
       </div>
     )

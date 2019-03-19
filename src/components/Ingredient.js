@@ -17,9 +17,9 @@ class Ingredient extends Component {
     return (
       <li className="ingredient" data-id={this.props.id}>
         <span className="ingredient-amount">{this.props.amount}&nbsp;</span>
-        <span className="ingredient-measurement-type">{this.props.unit.abbr}&nbsp;</span>
+        <span className="ingredient-measurement-type">{this.props.unit ? this.props.unit.abbr : ''}&nbsp;</span>
         <span className="ingredient-name">of {this.props.name}</span>
-        <button onClick={this.returnId}>Edit</button>
+        <button className="ingredient-edit" onClick={this.returnId}>Edit</button>
       </li>
     )
   }

@@ -12,6 +12,29 @@ class AddIngredientForm extends React.Component {
 
     // Bind submit handler
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.isNameValid = this.isNameValid.bind(this);
+    this.isAmountValid = this.isAmountValid.bind(this);
+
+    this.state =  {
+      'valid': false
+    }
+
+  }
+
+  isNameValid(ingredient) {
+    if(ingredient.hasOwnProperty('name') && ingredient.name.length > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  isAmountValid(ingredient) {
+    if(ingredient.hasOwnProperty('amount') && ingredient.amount) {
+      return true;
+    }
+
+    return false;
   }
 
   handleSubmit(event) {
@@ -30,9 +53,11 @@ class AddIngredientForm extends React.Component {
 
     // Only add ingredient if correct
     // TODO: add actually good checking/validation
-    if(typeof ingredient === 'object' && ingredient.hasOwnProperty('name') && ingredient.name.length > 0) {
-      this.props.submitIngredient(ingredient);
-      this.props.closeFormDisplay();
+    if (typeof ingredient === 'object') {
+      if (this.isNameValid(ingredient) && this.isAmountValid(ingredient)) {
+        this.props.submitIngredient(ingredient);
+        this.props.closeFormDisplay();
+      }
     }
   }
 
@@ -47,8 +72,14 @@ class AddIngredientForm extends React.Component {
     if (this.props.editingIngredient !== null) {
       var editing = this.props.editingIngredient;
       amount = editing.amount;
-      unit = editing.unit;
       name = editing.name;
+
+      if (typeof editing.unit === 'object') {
+        unit = editing.unit;
+      }
+      else {
+        unit = null;
+      }
     }
     else {
       amount = '';
@@ -75,7 +106,7 @@ class AddIngredientForm extends React.Component {
               </div>
 
               <div className="input-wrapper">
-                <label>Unit</label>
+                <label>Unit (optional)</label>
                 <select ref="unit" defaultValue="">
                   <option value="">Select Unit</option>
                   {
@@ -96,7 +127,6 @@ class AddIngredientForm extends React.Component {
                           </option>
                         );
                       }
-
                     })
                   }
                 </select>
